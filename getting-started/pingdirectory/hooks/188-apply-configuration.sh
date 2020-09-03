@@ -1,9 +1,12 @@
+
 #!/usr/bin/env sh
 #
 # Ping Identity DevOps - Docker Build Hooks
 #
-#- This hook runs through the followig phases:
-#-
+${VERBOSE} && set -x
+
+# shellcheck source=../../../../pingcommon/opt/staging/hooks/pingcommon.lib.sh
+. "${HOOKS_DIR}/pingcommon.lib.sh"
 
 set -x
 hostname | grep pingdirectory1
