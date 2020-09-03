@@ -1,4 +1,5 @@
 #!/usr/bin/env
+set -x
 hostname | grep pingdirectory1
 if [ $? -eq 0 ]; then
 

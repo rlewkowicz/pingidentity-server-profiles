@@ -1,4 +1,5 @@
 #!/usr/bin/env
+set -x
 dsconfig --no-prompt create-external-server --server-name pingdirectory2:389 --set server-host-name:pingdirectory2 --set server-port:389 --type ping-identity-ds --set "bind-dn:cn=Sync User,cn=Root DNs,cn=config" --set "password:2FederateM0re"
 dsconfig --no-prompt create-external-server --server-name pingdirectory1:389 --set server-host-name:pingdirectory1 --set server-port:389 --type ping-identity-ds --set "bind-dn:cn=Sync User,cn=Root DNs,cn=config" --set "password:2FederateM0re"
 dsconfig --no-prompt create-sync-source --source-name "Ping Identity Directory Server Source" --type ping-identity --set base-dn:dc=ad,dc=authnp,dc=rockfin,dc=com --set use-changelog-batch-request:true --set server:pingdirectory2:389
