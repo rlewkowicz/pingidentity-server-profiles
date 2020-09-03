@@ -54,8 +54,8 @@ fi
 hostname | grep pingdirectory2
 if [ $? -eq 0 ]; then
 
-    ldapsearch -T -b "dc=ad,dc=authnp,dc=rockfin,dc=com" "&(objectclass=person)" | grep dn: | sed 's/$/\nchangetype:delete\n'/ > tmp.ldif
-    ldapmodify -f tmp.ldif
+    dsconfig --no-prompt set-backend-prop --backend-name changelog --set changelog-include-attribute:entryUUID
+    dsconfig --no-prompt --applyChangeTo single-server set-backend-prop --backend-name changelog --set enabled:true
 
     echo 'dn: cn=Sync User,cn=Root DNs,cn=config
     changetype: add
@@ -100,6 +100,7 @@ if [ $? -eq 0 ]; then
     givenName: Sync
     userPassword: 2FederateM0re
     ds-cfg-alternate-bind-dn: cn=Sync User' > tmp.ldif
-    ldapmodify -f tmp.ldif   
+
+    ldapmodify -f tmp.ldif
     
 fi
