@@ -1,13 +1,6 @@
 #!/usr/bin/env sh
 ${VERBOSE} && set -x
 
-# shellcheck source=/dev/null
-test -f "${HOOKS_DIR}/pingcommon.lib.sh" && . "${HOOKS_DIR}/pingcommon.lib.sh"
-while true ; do
-    curl -ss -o /dev/null -k https://pingdirectory/directory/v1 2>&1 && break
-    sleep_at_most 8
-done
-sleep 2
 
 #
 # Set the sync pipe at the beginning of the changelog
@@ -33,6 +26,6 @@ dsconfig --no-prompt create-sync-pipe --pipe-name Ping_Identity_Directory_Server
 dsconfig --no-prompt create-sync-class --pipe-name Ping_Identity_Directory_Server_Source_to_Ping_Identity_Directory_Server_Destination --class-name DEFAULT --set evaluation-order-index:9999 --set synchronize-creates:true --set synchronize-modifies:true --set synchronize-deletes:true --set auto-mapped-source-attribute:-all-
 dsconfig --no-prompt set-sync-class-prop --pipe-name Ping_Identity_Directory_Server_Source_to_Ping_Identity_Directory_Server_Destination --class-name DEFAULT --add auto-mapped-source-attribute:entryUUID
 dsconfig --no-prompt set-sync-class-prop --pipe-name Ping_Identity_Directory_Server_Source_to_Ping_Identity_Directory_Server_Destination --class-name DEFAULT --set destination-correlation-attributes:entryUUID
-realtime-sync set-startpoint \
-    --end-of-changelog \
-    --pipe-name Ping_Identity_Directory_Server_Source_to_Ping_Identity_Directory_Server_Destination
+#realtime-sync set-startpoint \
+#    --end-of-changelog \
+#    --pipe-name Ping_Identity_Directory_Server_Source_to_Ping_Identity_Directory_Server_Destination
