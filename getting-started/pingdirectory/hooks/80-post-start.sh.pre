@@ -65,4 +65,5 @@ if [ $? -eq 0 ]; then
     dsconfig --no-prompt set-backend-prop --backend-name changelog --set changelog-include-attribute:entryUUID
     dsconfig --no-prompt --applyChangeTo single-server set-backend-prop --backend-name changelog --set enabled:true
     dsconfig --no-prompt set-backend-prop --backend-name changelog --add changelog-include-attribute:objectClass
+    dsconfig set-backend-prop --backend-name changelog --add 'changelog-include-attribute:*' --add "changelog-include-attribute:+"
 fi
